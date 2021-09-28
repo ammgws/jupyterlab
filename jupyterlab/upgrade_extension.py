@@ -140,7 +140,7 @@ def update_extension(target, branch=DEFAULT_COOKIECUTTER_BRANCH, interactive=Tru
 
     # Update style settings
     data.setdefault('styleModule', 'style/index.js')
-    if 'sideEffects' in data and 'style/index.js' not in data['sideEffects']:
+    if isinstance(data.get('sideEffects'), list) and 'style/index.js' not in data['sideEffects']:
         data['sideEffects'].append('style/index.js')
     if 'files' in data and 'style/index.js' not in data['files']:
         data['files'].append('style/index.js')
