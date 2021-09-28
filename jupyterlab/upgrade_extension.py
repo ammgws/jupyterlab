@@ -96,8 +96,11 @@ def update_extension(target, branch=DEFAULT_COOKIECUTTER_BRANCH, interactive=Tru
     with open(osp.join(output_dir, 'package.json')) as fid:
         temp_data = json.load(fid)
 
-    for (key, value) in temp_data['devDependencies'].items():
-        data['devDependencies'][key] = value
+    if data.get('devDependencies'):
+        for (key, value) in temp_data['devDependencies'].items():
+            data['devDependencies'][key] = value
+    else:
+        data['devDependencies'] = temp_data['devDependencies'].copy()
 
     # Ask the user whether to upgrade the scripts automatically
     warnings = []
